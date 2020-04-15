@@ -1,15 +1,36 @@
-## Put comments here that give an overall description of what your
-## functions do
+## The following 2 fns compute the inverse of a matrix and store the value in cache
+## For recomputing the value of same matrix, value is first looked up in cache
+## If value exists in cache, it is returned else inverse is computed and stored in cache
 
-## Write a short comment describing this function
-
+## makeCacheMatrix creates a special matrix object for caching matrix inverse
+## Returns a list with fns to set and get values of matrix and its inverse respectively
 makeCacheMatrix <- function(x = matrix()) {
-
+    m <- NULL
+    set <- function(y) {
+        x <<- y
+        m <<- NULL
+    }
+    get <- function() x
+    setinverse <- function(inverse) m <<- inverse
+    getinverse <- function() m
+    list(set = set, get = get,
+         setinverse = setinverse,
+         getinverse = getinverse)
 }
 
 
-## Write a short comment describing this function
+## cacheSolve returns inverse of given matrix. If inverse is already solved, 
+## value is returned from cache. Else inverse is computed and stored in cache
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
+    m <- x$getinverse()
+    if(!is.null(m)) {
+        message("getting cached data")
+        return(m)
+    }
+    data <- x$get()
+    m <- solve(data, ...)
+    x$setinverse(m)
+    m
 }
