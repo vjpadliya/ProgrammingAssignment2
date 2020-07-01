@@ -1,9 +1,9 @@
-## The following 2 fns compute the inverse of a matrix and store the value in cache
+## The 2 functions below compute the inverse of a matrix and cache its value
 ## For recomputing the value of same matrix, value is first looked up in cache
-## If value exists in cache, it is returned else inverse is computed and stored in cache
+## If value exists, it is returned from cache else inverse is computed and stored in cache
 
 ## makeCacheMatrix creates a special matrix object for caching matrix inverse
-## Returns a list with fns to set and get values of matrix and its inverse respectively
+## Returns a list of fns to set and get values of matrix and its inverse respectively
 makeCacheMatrix <- function(x = matrix()) {
     m <- NULL
     set <- function(y) {
@@ -19,7 +19,7 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## cacheSolve returns inverse of given matrix. If inverse is already solved, 
+## cacheSolve returns inverse of matrix. If inverse is already solved, 
 ## value is returned from cache. Else inverse is computed and stored in cache
 
 cacheSolve <- function(x, ...) {
